@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wareHousesModelStoreContainer" CdmEntityContainer="wareHousesEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="wareHousesModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="wareHousesModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Desription" ColumnName="Desription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="outputs">
+      <EntityTypeMapping TypeName="wareHousesModel.output">
+        <MappingFragment StoreEntitySet="output">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Depid" ColumnName="Depid" />
+          <ScalarProperty Name="productid" ColumnName="productid" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="iscancel" ColumnName="iscancel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="wareHousesModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="Available" ColumnName="Available" />
+          <ScalarProperty Name="Tacked" ColumnName="Tacked" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CAteId" ColumnName="CAteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

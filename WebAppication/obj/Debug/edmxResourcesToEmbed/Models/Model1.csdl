@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wareHousesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="Self.FK_product_Category" FromRole="Category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Desription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="outputs" Relationship="Self.FK_output_Department" FromRole="Department" ToRole="output" />
+  </EntityType>
+  <EntityType Name="output">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Data" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="Depid" Type="Int32" />
+    <Property Name="productid" Type="Int32" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="iscancel" Type="Boolean" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_output_Department" FromRole="output" ToRole="Department" />
+    <NavigationProperty Name="product" Relationship="Self.FK_output_product" FromRole="output" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CAteId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_product_Category" FromRole="product" ToRole="Category" />
+    <NavigationProperty Name="outputs" Relationship="Self.FK_output_product" FromRole="product" ToRole="output" />
+    <Property Name="Tacked" Type="Int32" Nullable="false" />
+    <Property Name="Available" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <Association Name="FK_product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="CAteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_output_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="output" Type="Self.output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="output">
+        <PropertyRef Name="Depid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_output_product">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="output" Type="Self.output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="output">
+        <PropertyRef Name="productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="wareHousesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="outputs" EntityType="Self.output" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="FK_product_Category" Association="Self.FK_product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_output_Department" Association="Self.FK_output_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="output" EntitySet="outputs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_output_product" Association="Self.FK_output_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="output" EntitySet="outputs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

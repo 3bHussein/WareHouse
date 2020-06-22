@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WebAppication.Models.product>
+
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+
+@using (Html.BeginForm("fullsearch", "products", FormMethod.Post))
+{
+
+    <div class="row form-horizontal">
+
+        @Html.TextBox("search", null, new { @class = "form-control col-md-11", placeholder = "search", style = "max-width:500px" })
+
+        <input type="submit" value="searchFR" class="btn btn-primary col-md-1" />|
+        @Html.ActionLink("Back To list", "index", new { area = "" }, new { @class = "btn btn-info" })
+
+    </div>
+}
+
+<h2>List of products</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new {@class="btn btn-primary" })
+</p>
+<div class="">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model=>model.Type)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                CurrentNumber
+            </th>
+            <th>
+                CategoryName
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                @*<td>@Html.DisplayFor(modelitem=>item.Type)</td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.currentNO)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-warning" })
+                    @if (User.IsInRole("Owner"))
+                    {
+                        @: | @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+
+
+
+
+
+
+
+
+                    }
+                </td>
+                </td>
+            </tr>
+        }
+        <HR class="btn-warning" />
+
+    </table>
+</div>
+@Html.PagedListPager((IPagedList)Model, a => Url.Action("index", new { Page = a }), PagedListRenderOptions.TwitterBootstrapPager)

@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Controll Panal";
+}
+<hr />
+<h2 class='btn-block text-center xy'>Controll Panal</h2>
+
+<hr />
+@section style{
+    <style>
+        .jumba {
+            text-decoration: none !important;
+        }
+
+            .jumba :focus {
+                text-decoration: none !important;
+            }
+
+
+            .jumba :hover {
+                text-decoration: none !important;
+            }
+            .xy{
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+    </style>
+}
+
+
+
+
+<br />
+
+
+<div class="container">
+
+    <div style="margin-left:7%;" id="xml">
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                <a href="#" class="jumba">BackUp Data</a>
+                <p>You Can Backup Your DataBase From Here </p>
+                @Html.ActionLink("BackUP", "BackupDatabase", "Home", new { area = "" }, new { @class = "btn btn-primary", target = "_blank" })
+
+            </div>
+
+
+            <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                <a class="jumba" href="#">Register Card</a>
+                <p>Your Can Register new User From Here </p>
+                @Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn btn-primary" })
+
+            </div>
+        }
+        @if (User.IsInRole("Owner"))
+        {
+            <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                <a class="jumba " href="#">permission Card</a>
+                <p>you Can Give Any one the permission From Here</p>
+                @Html.ActionLink("Give Permission", "index", "Permission", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+
+
+
+            <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                <a href="#" class="jumba">Roles Card</a>
+                <p>you can Add new Roles and Edit or Delete later</p>
+                @Html.ActionLink("Go TO Roles", "index", "Roles", new { area = "" }, new { @class = "btn btn-primary" })
+
+            </div>
+
+            <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                <a href="#" class="jumba">User Card</a>
+                <p>you can Manage User User and Edit or Delete later</p>
+                @Html.ActionLink("Go TO User", "index", "Users", new { area = "" }, new { @class = "btn btn-primary" })
+
+            </div>
+
+
+
+        }
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+@section scripts{
+
+
+}

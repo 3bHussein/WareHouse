@@ -1,0 +1,68 @@
+﻿
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+    max-height: 100px;
+}
+
+
+
+
+.bg-dark {
+    background: #071851 !important;
+    color: #efeeee !important;
+}
+
+.foot {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#footr {
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    position: static;
+}
+
+.fontx {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+
+#d {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font: 2erm,bold;
+}
+
+
+#go {
+}
+
+.cen{
+
+    text-align:left!important;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+}
+.txtarea{
+    max-height:100px!important;
+
+}
+
+
+

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<WebAppication.Models.output>
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+@*<div class="form-group">
+    @using (Ajax.BeginForm(new AjaxOptions() { Url = "/outputs/Search/", UpdateTargetId = "customertables", AllowCache = true }))
+    {
+        <div class="row form-horizontal">
+
+            @Html.TextBox("txt", null, new { @class = "form-control col-md-11", placeholder = "search", style = "max-width:500px" })
+
+            <input type="submit" value="search" class="btn btn-primary col-md-1" />|
+            @Html.ActionLink("Back To list", "index", new { area = "" }, new { @class="btn btn-info"})
+
+        </div>
+    }
+</div>*@
+
+@using (Html.BeginForm("fullsearch", "outputs", FormMethod.Post))
+            {
+
+    <div class="row form-horizontal">
+
+        @Html.TextBox("search", null, new { @class = "form-control col-md-11", placeholder = "search", style = "max-width:500px" })
+
+        <input type="submit" value="searchFR" class="btn btn-primary col-md-1" />|
+       @Html.ActionLink("Back To list", "index", new { area = "" }, new { @class = "btn btn-info" })
+
+    </div>
+}
+
+
+
+
+
+
+<h2>List of Azn</h2>
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<div id="customertables">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.ProductName)
+            </th>
+            <th>
+                DepartmentName
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+{
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.ProductName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.product.Type)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-warning" }) 
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.id },new { @class="btn btn-danger"})*@
+                </td>
+            </tr>
+        }
+
+        <HR class="btn-warning" />
+
+    </table>
+    @Html.PagedListPager((IPagedList)Model, a => Url.Action("index", new { Page=a}),PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

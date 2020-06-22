@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section style{
+<style>
+        .jumba {
+            text-decoration: none !important;
+        }
+
+            .jumba :focus {
+                text-decoration: none !important;
+            }
+
+
+            .jumba :hover {
+                text-decoration: none !important;
+            }    </style>
+}
+
+
+
+
+<br />
+
+
+<div class="container">
+
+    <div style="margin-left:7%;" id="xml">
+@if (User.Identity.IsAuthenticated)
+{
+
+        <div class="jumbotron col-lg-5">
+            <a href="#" class="jumba">product Card</a>
+            <p>you can Add new product and Edit or Delete later</p>
+            @Html.ActionLink("Go TO Product", "index", "products", new { area = "" }, new { @class = "btn btn-primary" })
+
+        </div>
+
+        <div class="jumbotron col-lg-5" style="margin-left:4px;">
+            <a class="jumba "href="#">Category Card</a>
+            <p>you can Add new Category and Edit or Delete later</p>
+            @Html.ActionLink("Go TO Category", "index", "Categories", new { area = "" }, new { @class = "btn btn-primary" })
+        </div>
+
+        @*<div class="jumbotron col-lg-5" style="margin-left:4px;">
+            <a class="jumba"href="#">Department Card</a>
+            <p>you can Add new Department and Edit or Delete later</p>
+            @Html.ActionLink("Go TO Departmnet", "index", "Departments", new { area = "" }, new { @class = "btn btn-primary" })
+
+        </div>*@
+        @*<div class="jumbotron col-lg-5" style="margin-left:4px;">
+            <a href="#" class="jumba">Orders Card</a>
+            <p>you can Add new Order and search in list ,Edit ,Delete orders</p>
+            @Html.ActionLink("Go TO Orders", "index", "Outputs", new { area = "" }, new { @class = "btn btn-primary" })
+
+        </div>*@
+}
+        @if (User.IsInRole("Admin")||User.IsInRole("Owner"))
+        {
+                <div class="jumbotron col-lg-5" style="margin-left:4px;">
+                    <a href="#" class="jumba">Cpanal Card</a>
+                    <p>you can control in every User and Roles And Database inside Your APP</p>
+                    @Html.ActionLink("Go TO Cpanal", "Cpanal", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+
+                </div>
+
+        }
+
+
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+</div>
+
+
+@section scripts{
+
+
+    }
